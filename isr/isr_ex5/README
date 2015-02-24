@@ -1,0 +1,10 @@
+About interrupt context and process context using current macro
+
+
+Kernel space and user space is one of the foundations of the theory of operating system,the kernel function module runs in kernel space, while the application runs in the userspace. Modern CPU have different modes of operation, to represent different levels, different levels will have different functions, certain operations in the lower level will be prohibited. Linux system design takes advantage of hardware features, the use of the two levels, the highest level and the lowest level.The kernel is running in the highest level whereas the application is running	at a lower level. Kernel mode and user mode has its own memory mapping, that is its own address space.
+
+Through system calls, user space applications will enter the kernel space.User space and kernel space has a different address mapping, general or special register set.When the userspace process pass a lot of paramters to the kernel, the kernel will save the userspace registers,variables and so on , after the end of the system call back to the user-space
+
+Similarly, the hardware by a trigger signal,the kernel interrupt handler was called into the kernel space.In this process, some of the variables and paramters of the hardware is also passed to the kernel.this is interrupt context.
+
+So the linux kernel either work in process context(system call) or interrupt context(hardware interrupt)

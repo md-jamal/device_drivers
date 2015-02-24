@@ -1,0 +1,3 @@
+Threaded interrupt handlers were introduced to reduce the time spent in interrupt handler and deferring the rest of the work out into kernel threads.So the top half would consist of a "quick check handler" that just ensures the interrupt is from the device , if so , it simply acknowledges the interrupt to the hardware and tells the kernel to wake the interrupt handler thread.
+
+Interrupt handler is called in interrupt context and it's job is to usually to quite the device and return. it cannot sleep. If it's return value is IRQ_WAKE_THREAD, the thread function will be called in process context,it can sleep
