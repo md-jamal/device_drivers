@@ -1,0 +1,4 @@
+
+tasklet_enable(struct tasklet *ptr) :Enables the tasklet
+
+tasklet_disable(struct tasklet *ptr) : Disables the tasklet

@@ -39,8 +39,8 @@ static int isr_init(void)
 	printk("Hello World\n");
 
 	/*
-	 * IRQF_SHARED: 
-	 *
+	 * You can use also devm_request_threaded_irq instead of request_threaded_irq
+	 * in this case you no need to worry about freeing resources
 	 */
 
 	ret = request_threaded_irq(irq, irq_handler, irq_wakeup, IRQF_SHARED,

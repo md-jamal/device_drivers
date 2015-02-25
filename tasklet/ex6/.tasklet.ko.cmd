@@ -1,0 +1,1 @@
+cmd_/home/jumbo/jamal/project/Device_Driver/tasklet/ex6/tasklet.ko := ld -r -m elf_i386 -T ./scripts/module-common.lds --build-id  -o /home/jumbo/jamal/project/Device_Driver/tasklet/ex6/tasklet.ko /home/jumbo/jamal/project/Device_Driver/tasklet/ex6/tasklet.o /home/jumbo/jamal/project/Device_Driver/tasklet/ex6/tasklet.mod.o

@@ -1,0 +1,34 @@
+
+Tasklets are represented by the tasklet_struct structure. Each structure represents a unique tasklet.
+The structure is declared in <linux/interrupt.h>
+  struct tasklet_struct {
+	struct tasklet_struct *next;	//next tasklet in the list
+ 	unsigned long state;		//state of the tasklet
+ 	atomic_t count;			//reference count
+ 	void (*func)(unsigned long);	//tasklet handler function
+ 	unsigned long data;		//argument to the tasklet function
+ 
+ 	state can be either TASKLET_STATE_SCHED or TASKLET_STATE_RUN. TASKLET_STATE_SCHED denotes a 
+ 	tasklet is scheduled to run and TASKLET_STATE_RUN denotes a tasklet is running
+ 
+ 	The count field is used for reference count. If it is nonzero, the tasklet is disabled and cannot
+ 	run;if it is zero, the tasklet is enabled and can run if marked pending.
+ 
+ 
+
+
+
+ 	Statically creating a tasklet.Two ways:
+ 	DECLARE_TASKLET(name, func, data);
+ 	DECLARE_TASKLET_DISABLED(name, func, data);
+ 
+ 	Both these macros statically create a struct tasklet_struct with the given name. When the tasklet
+ 	is scheduled,the given function func is executed and passed the argument as data.The difference 
+ 	between the two is the initial reference count.The first macro creates a tasklet with a count of
+ 	zero, and the tasklet is enabled.The second macro creates a tasklet, and sets the count to one 
+ 	and the tasklet is disabled.
+ 
+ 
+
+	 To schedule a tasklet for execution, tasklet_schedule() is called and passed a pointer to
+	 the relevant tasklet_struct

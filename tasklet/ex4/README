@@ -1,0 +1,3 @@
+After a tasklet is scheduled, it runs once at a time in the near future. If the same tasklet is scheduled again, before it has had a chance to run, it still runs only once. 
+
+Whenver tasklet is created, the state field is set to TASKLET_STATE_SCHED, and whenever the tasklet is running, the tasklet field will be set to TASKLET_STATE_RUN. So, when you call tasklet_schedule, it checks for the state bit of the tasklet, if it is set to TASKLET_STATE_RUN, it will queue it else discard it/
