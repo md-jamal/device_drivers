@@ -1,0 +1,10 @@
+Queued Work is executed when the worker thread next wakes up. Sometimes, you need to ensure that a given batch of work has to be completed before continuing. This is especially important for modules, which almost certainly want to call this function  before unloading.
+
+For these needs, there is a function to flush the given work queue.
+
+void flush_scheduled_work(work);
+
+
+This function waits untill all the entries in the queue are executed before returning.
+
+Any work that is scheduled via schedule_delayed_work() , and whose delay is not yet up, is not flushed via flush_scheduled_work().

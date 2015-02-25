@@ -1,0 +1,5 @@
+Sometimes you do not want the work to execute immediately, but instead after some delay.In those cases,you can schedule work to execute at a given time in the future.
+
+schedule_delayed_work(&work, delay);
+
+

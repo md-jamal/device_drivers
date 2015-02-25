@@ -1,0 +1,17 @@
+
+Work Queue is a deferred work. It always run in process context. As it is process context, work queues are schedulable and can therefore sleep.
+
+Normally it is easy to decide between using workqueues and softirq/tasklets. If the deferred work needs to sleep, work queues are used.If the deferred work need not sleep,softirq/tasklets can be used.
+
+In its most basic form, the workqueue subsystem is an interface for creating kernel threads to handle work that is queued from elsewhere.These kernel threads are called worker threads. Work queues let your driver create a special worker thread to handle deferred work.The work queue subsystem, however implements and provides a default worker thread for handling work. Therefore,in its most common form, a work queue is a simple interface for deferring work to a generic kernel thread.
+
+	Many drivers in the kernel thread defer their bottom-half work to the default thread. Unless, a driver or subsystem has a strong requirement for creating its own thread,the default thread is preferred.Create your own worker thread only when it is processor-intense and performance critical operations.
+
+
+Data structures representing  the Threads:
+
+	The worker threads are represented by the workqueue_struct structure.Each type of worker thread has one workqueue_struct associated to it.All worker threads are implemented as normal kernel threads running the worker_thread() function. After initial setup, this function enters an infinite loop and goes to sleep.When work is queued,the thread is awakened and processes the work. When there is no work left to process,it goes back to sleep.
+
+	The work is represented by the work_struct structure defined in linux/workqueue.h.
+
+At the highest level, there are worker threads. There can be multiple types of worker threads. There is one worker thread per processor of a given type.Parts of the kernel thread can create worker threads as needed.

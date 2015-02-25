@@ -1,0 +1,3 @@
+We can create work at run-time via a pointer
+
+INIT_WORK(struct work_struct *work, void (*func)(void *), void *data);

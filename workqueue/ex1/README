@@ -1,0 +1,10 @@
+The first step is actually creating some work to defer. To create the structure statically at run-time,use DECLARE_WORK:
+
+DECLARE_WORK(name, void (*func)(void *), void *data)
+
+
+This statically creates a work_struct structure named name with handler function func and argument data
+
+Now that the work is created, we can schedule it.  To queue a given work's handler function with the default worker threads, simply call
+
+schedule_work(&work);

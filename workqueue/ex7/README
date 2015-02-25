@@ -1,0 +1,12 @@
+If the default queue is insufficient for your needs, you can create  a new work queue and corresponding worker threads. Because this creates one worker thread per processor, you should create unique worker queues only if your code really needs the performance of a unique set of threads.
+
+You can create a new work queue and the associated worker thread via a simple function:
+struct workqueue_struct *create_workqueue(const char *name);
+
+The parameter name is used to name the kernel thread.
+
+Creating work is handled in the same manner regardless of the queue type. After the work is created, the following functions are analogous to schedule_work() and schedule_delayed_work() except they work on the given work queue and not the default queue
+
+int queue_work(struct workqueue_struct *wq, struct work_struct *work);
+int queue_delayed_work(struct workqueue_struct *wq, struct work_struct *work,
+			unsigned long delay);
